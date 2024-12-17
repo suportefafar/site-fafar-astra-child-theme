@@ -98,7 +98,7 @@ function get_menu_by_current_content() {
 
 function site_fafar_highlight_area() {
 
-    if ( ! is_user_logged_in() ) return '';
+    //if ( ! is_user_logged_in() ) return '';
 
     return '
     <div class="container w-100">
