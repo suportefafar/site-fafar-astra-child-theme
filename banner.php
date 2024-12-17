@@ -56,8 +56,23 @@ function get_custom_banner() {
 
         }
    
-        $html = '<div id="banner-container" class="ast-container">' .
-                    '<div id="banner-container" class="page-banner-container banner-image-custom-transition" style="background-image: url(' . $banner_image_url . ');">' .
+        if ( $banner_image_url == 'https://www.farmacia.ufmg.br/wp-content/uploads/2015/06/fafar1.jpg' ) {
+            
+            $title = '';
+            $subtitle = '';
+            $banner_image_url = get_stylesheet_directory_uri() . '/assets/img/fafar-vista-aerea.jpeg';
+
+        }
+
+        $autoplay = null;
+        if ( is_home() ) {
+
+            $autoplay = 'true';
+
+        }
+
+        $html = '<div id="banner-container" class="ast-container" data-autoplay="' . $autoplay . '">' .
+                    '<div class="page-banner-container banner-image-custom-transition" style="background-image: url(' . $banner_image_url . ');">' .
                             '<div class="page-banner-body">' .
                                 '<h2 class="page-banner-title">' . $title  . '</h2>' .
                                 '<h3 class="page-banner-subtitle">' . $subtitle  . '</h3>' .
@@ -65,9 +80,6 @@ function get_custom_banner() {
                     '</div>' .
                 '</div>';
 
-        if($banner_image_url == 'https://www.farmacia.ufmg.br/wp-content/uploads/2015/06/fafar1.jpg'){
-            $html = "";
-        }
     
         echo $html;
     }

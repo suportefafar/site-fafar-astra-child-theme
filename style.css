@@ -76,8 +76,6 @@ p {
   background-repeat: repeat;
   background-size: cover;
   background-position: center center;
-
-  border-radius: 0.5rem;
 }
 
 .page-banner-body {
@@ -91,8 +89,6 @@ p {
   align-items: center;
 
   background-color: rgba(0, 0, 0, 0.4);
-
-  border-radius: 0.5rem;
 }
 
 h2.page-banner-title {
@@ -286,6 +282,27 @@ form.wpcf7-form label {
 /*Hover*/
 .highlight-card:hover {
   cursor: pointer;
-  /* border-color: #f2b600; */
   opacity: 0.75;
+}
+
+/*
+ * Altera o padding do container de cada item da lista de posts
+ */
+.ast-separate-container .ast-blog-layout-5-grid .post-content {
+  padding: 0.8rem 1rem 0rem 1rem;
+}
+
+/*
+ * Remover padding do primeiro nível do footer
+ */
+.site-primary-footer-wrap[data-section="section-primary-footer-builder"] {
+  padding: 1rem;
+}
+
+/*
+ * Remover margin das figuras do primeiro nível do footer
+ */
+.site-primary-footer-wrap[data-section="section-primary-footer-builder"]
+  figure.wp-block-image {
+  margin: 0;
 }
