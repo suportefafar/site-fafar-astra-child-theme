@@ -1,0 +1,293 @@
+/**
+Theme Name: Site FAFAR Astra Child Theme
+Author: Brainstorm Force
+Author URI: http://wpastra.com/about/
+Description: Astra is the fastest, fully customizable & beautiful theme suitable for blogs, personal portfolios and business websites. It is very lightweight (less than 50KB on frontend) and offers unparalleled speed. Built with SEO in mind, Astra comes with schema.org code integrated so search engines will love your site. Astra offers plenty of sidebar options and widget areas giving you a full control for customizations. Furthermore, we have included special features and templates so feel free to choose any of your favorite page builder plugin to create pages flexibly. Some of the other features: # WooCommerce Ready # Responsive # Compatible with major plugins # Translation Ready # Extendible with premium addons # Regularly updated # Designed, Developed, Maintained & Supported by Brainstorm Force. Looking for a perfect base theme? Look no further. Astra is fast, fully customizable and beautiful theme!
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: site-fafar-astra-child-theme
+Template: astra
+*/
+
+/*
+* MODIFICANDO CLASSES DO ASTRA THEME
+* START
+*/
+.ast-main-header-wrap .main-header-bar-wrap {
+  position: -webkit-sticky !important; /* for browser compatibility */
+  position: sticky !important;
+  top: 0 !important;
+}
+/*
+* END
+*/
+
+p {
+  text-align: justify !important;
+}
+
+.fafar-side-menu-item {
+  font-size: 0.9rem;
+}
+
+.fafar-side-menu-sub-item {
+  background-color: #eee !important;
+  justify-content: left !important;
+}
+
+.fafar-side-menu-item:hover {
+  background-color: #f2b600 !important;
+  color: #ffffff !important;
+}
+
+.list-group-item > .ast-arrow-svg {
+  width: 0.6em;
+  height: 0.6em;
+  font-weight: normal;
+  fill: currentColor;
+}
+
+.container-title-sidemenu {
+}
+
+.title-sidemenu {
+}
+
+.quadmenu-navbar-nav li {
+  width: 100% !important;
+}
+
+.quadmenu-text.hover.t_1000 {
+}
+
+/**
+ *  Banner
+ *  START
+ */
+
+#banner-container {
+  margin-top: 1rem;
+}
+
+.page-banner-container {
+  height: 32vh !important;
+
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center center;
+
+  border-radius: 0.5rem;
+}
+
+.page-banner-body {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.4);
+
+  border-radius: 0.5rem;
+}
+
+h2.page-banner-title {
+  color: white;
+}
+
+h3.page-banner-subtitle {
+  color: yellow;
+}
+
+.banner-image-custom-transition {
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+  -ms-animation: fadein 2s; /* Internet Explorer */
+  -o-animation: fadein 2s; /* Opera < 12.1 */
+  animation: fadein 2s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 921px) {
+  #banner-container {
+    height: 16vh !important;
+  }
+}
+/*
+  END
+*/
+
+/*
+  Contact Form 7
+  START
+*/
+
+form.wpcf7-form label {
+  width: 100%;
+}
+
+/*
+  END
+*/
+
+/*
+  Language flags of GTranslate Plugin
+  START
+*/
+
+.gt_switcher_wrapper {
+  margin-top: 2rem;
+}
+
+@media (max-width: 921px) {
+  .gt_switcher_wrapper {
+    margin-top: 6rem;
+  }
+}
+
+/*
+  END
+*/
+
+/*
+  Take out left spacing from footer list itens
+  START
+*/
+
+#menu-links.menu {
+  padding-left: 0px;
+}
+
+#menu-graduacoes {
+  padding-left: 0px;
+}
+
+#menu-pos-graduacoes {
+  padding-left: 0px;
+}
+
+/*
+  END
+*/
+
+/*
+  Little generic transition
+  START
+  Building.......
+*/
+
+@keyframes slideAndHide {
+  0% {
+    opacity: 1;
+  }
+
+  99% {
+    opacity: 0.01;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.animation-to-hide-element {
+  animation-name: slideAndHide;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: none;
+
+  display: none;
+}
+
+.transition-to-hide {
+  opacity: 0;
+  transition: all 1s;
+}
+
+.transition-to-hide.transition-to-visible {
+  opacity: 1;
+}
+/*
+  END
+*/
+
+/*
+ * Retira as bordas laterais 
+ * das tabelas com class .table
+ */
+.table {
+  border-left: 0px !important;
+}
+
+/*
+ * Estilos para os cards da área de destaque da página inicial
+ */
+.highlight-card {
+  width: 160px !important;
+  height: 90px !important;
+  background: #f5f5f5;
+  position: relative;
+  border: 2px solid #c3c6ce;
+  margin: 0.5rem;
+  padding: 0 !important;
+  transition: 0.5s ease-out;
+  overflow: visible;
+}
+
+.highlight-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+/*Hover*/
+.highlight-card:hover {
+  cursor: pointer;
+  border-color: #f2b600;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
