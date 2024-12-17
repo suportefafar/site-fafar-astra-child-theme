@@ -118,4 +118,5 @@ function site_fafar_highlight_area() {
             </div>
         </div>
     </div>';
+    
 }
