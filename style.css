@@ -315,8 +315,18 @@ form.wpcf7-form label {
 }
 
 /*
- * 
+ * Banner e o conteúdo desalinhavam, em algumas páginas
+ * Com isso setado, a parte de Personalizar que modifica a largura do container não funciona
  */
 .ast-container {
   max-width: 1200px;
+}
+
+/*
+ * O padrão seria 60px
+ * Mudado porque o margin-top do banner é 2rem
+ */
+#primary,
+#secondary {
+  margin-top: 2rem !important;
 }
