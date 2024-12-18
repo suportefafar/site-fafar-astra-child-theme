@@ -101,22 +101,64 @@ function site_fafar_highlight_area() {
 
     if ( ! is_user_logged_in() ) return '';
 
+    if ( have_posts() ) {
+
+        query_posts('post_type=servicos&showposts=40&orderby=date&order=ASC');
+
+        $itens = '';
+
+        while ( have_posts() ) {
+
+            the_post(); 
+            
+            $title       = the_title( $before = '', $after = '', $display = false );
+
+            $guid        = get_the_guid();
+
+            $url_servico = get_field('link_serviço');
+
+            $id_img      = get_field('imagem_servico');
+            $url_img     = wp_get_attachment_url($id_img);
+
+            // print_r($servico);
+            // print_r('<br/>');
+            
+            $itens .= 
+                    '<div class="col col-sm-6 col-md-4 highlight-card">
+                        <a href="' . $url_servico . '" target="_blank" title="Ir para ' . $title . '">
+                            <img src="' . $url_img . '" alt="Logo da ' . $title . '" />
+                        </a>
+                    </div>';
+        }
+
+    }
+
+    // return '
+    // <div class="container w-100">
+    //     <div class="row">
+    //         <h6>Destaques</h6>
+    //     </div>
+    //     <div class="row">
+    //         <div class="col col-sm-6 col-md-4 highlight-card">
+    //             <a href="https://www.farmacia.ufmg.br/escutas/" target="_blank" title="Ir para Escuta Acadêmica">
+    //                 <img src="https://www.farmacia.ufmg.br/wp-content/uploads/2024/12/escuta-fafar.png" alt="Logo da Escuta Acadêmica" />
+    //             </a>
+    //         </div>
+    //         <div class="col col-sm-6 col-md-4 highlight-card">
+    //             <a href="https://www.farmacia.ufmg.br/apresentacao-8/" target="_blank" title="Ir para Gerência Ambiental e Biossegurança">
+    //                 <img src="https://www.farmacia.ufmg.br/wp-content/uploads/2024/12/gerenciamento-ambiental-biosseguranca.png" alt="Logo da Gerência Ambiental e Biossegurança" />
+    //             </a>
+    //         </div>
+    //     </div>
+    // </div>';
+
     return '
     <div class="container w-100">
         <div class="row">
-            <h6>Destaques</h6>
+            <h6>Serviços</h6>
         </div>
         <div class="row">
-            <div class="col col-sm-6 col-md-4 highlight-card">
-                <a href="https://www.farmacia.ufmg.br/escutas/" target="_blank" title="Ir para Escuta Acadêmica">
-                    <img src="https://www.medicina.ufmg.br/wp-content/uploads/sites/7/2019/08/Destaquinho-Escuta-academica.png" alt="Logo da Escuta Acadêmica" />
-                </a>
-            </div>
-            <div class="col col-sm-6 col-md-4 highlight-card">
-                <a href="https://www.farmacia.ufmg.br/apresentacao-8/" target="_blank" title="Ir para Gerência Ambiental e Biossegurança">
-                    <img src="https://blog.ifope.com.br/wp-content/uploads/2020/05/biosseguran%C3%A7a-01-2750x1375.png" alt="Logo da Gerência Ambiental e Biossegurança" />
-                </a>
-            </div>
+        ' . $itens . '
         </div>
     </div>';
 
