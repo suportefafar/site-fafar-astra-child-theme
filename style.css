@@ -295,6 +295,25 @@ form.wpcf7-form label {
 }
 
 /*
+ * Altera o padding do container do conteúdo das páginas e posts
+ */
+.ast-separate-container .ast-article-single:not(.ast-related-post),
+.woocommerce.ast-separate-container .ast-woocommerce-container,
+.ast-separate-container .error-404,
+.ast-separate-container .no-results,
+.single.ast-separate-container .ast-author-meta,
+.ast-separate-container .related-posts-title-wrapper,
+.ast-separate-container .comments-count-wrapper,
+.ast-box-layout.ast-plain-container .site-content,
+.ast-padded-layout.ast-plain-container .site-content,
+.ast-separate-container .ast-archive-description,
+.ast-separate-container .comments-area .comment-respond,
+.ast-separate-container .comments-area .ast-comment-list li,
+.ast-separate-container .comments-area .comments-title {
+  padding: 1rem;
+}
+
+/*
  * Redefine o padding na área em cima do footer
  * É utilizado para área de Serviços
  */
