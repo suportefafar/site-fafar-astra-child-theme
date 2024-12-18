@@ -67,7 +67,7 @@ p {
  */
 
 #banner-container {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .page-banner-container {
@@ -143,12 +143,6 @@ h3.page-banner-subtitle {
   }
   to {
     opacity: 1;
-  }
-}
-
-@media (max-width: 921px) {
-  #banner-container {
-    height: 16vh !important;
   }
 }
 
@@ -271,7 +265,7 @@ form.wpcf7-form label {
   background-color: #fff;
   margin: 0.5rem;
   padding: 0rem !important;
-  transition: 0.1s ease-out;
+  transition: 0.25s ease-out;
 }
 
 .highlight-card a {
@@ -280,12 +274,12 @@ form.wpcf7-form label {
 .highlight-card img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill;
 }
 
-/*Hover*/
 .highlight-card:hover {
   cursor: pointer;
+  border-color: #f2b600;
   opacity: 0.75;
 }
 
@@ -297,10 +291,19 @@ form.wpcf7-form label {
 }
 
 /*
+ * Redefine o padding na área em cima do footer
+ * É utilizado para área de Serviços
+ */
+.site-above-footer-wrap[data-section="section-above-footer-builder"] {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/*
  * Remover padding do primeiro nível do footer
  */
 .site-primary-footer-wrap[data-section="section-primary-footer-builder"] {
-  padding: 1rem;
+  padding: 1.5rem 1rem;
 }
 
 /*
@@ -309,4 +312,11 @@ form.wpcf7-form label {
 .site-primary-footer-wrap[data-section="section-primary-footer-builder"]
   figure.wp-block-image {
   margin: 0;
+}
+
+/*
+ * 
+ */
+.ast-container {
+  max-width: 1200px;
 }
