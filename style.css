@@ -267,7 +267,7 @@ form.wpcf7-form label {
 .highlight-card {
   width: 160px !important;
   height: 90px !important;
-  /* border: 2px solid #c3c6ce; */
+  border: 1px solid #dee2e6;
   background-color: #fff;
   margin: 0.5rem;
   padding: 0rem !important;
