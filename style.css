@@ -67,7 +67,7 @@ p {
  */
 
 #banner-container {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .page-banner-container {
@@ -258,6 +258,10 @@ form.wpcf7-form label {
 /*
  * Estilos para os cards da área de destaque da página inicial
  */
+.highlight-container {
+  margin: 2rem 0;
+}
+
 .highlight-card {
   width: 160px !important;
   height: 90px !important;
@@ -295,8 +299,8 @@ form.wpcf7-form label {
  * É utilizado para área de Serviços
  */
 .site-above-footer-wrap[data-section="section-above-footer-builder"] {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
 }
 
 /*
