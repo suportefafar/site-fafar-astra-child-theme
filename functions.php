@@ -56,6 +56,10 @@ require_once 'class-wp-fafar-menu-walker.php';
  * */
 require_once 'banner.php';
 
+// Carregar funções customizadas
+
+require_once get_stylesheet_directory() . '/hooks.php';
+
 
 /*
  * Changing "Read More" button text  
