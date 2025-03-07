@@ -52,93 +52,41 @@ function mapa_salas_content_js_handler() {
 
 }
 
-function parse_weekday_to_name( $number ) {
-
-    if( ! $number ) return 'N/A';
-
-    if( ! is_numeric($number) ) return $number;
-
-    return array(
-        0 => 'Dom',
-        1 => 'Seg',
-        2 => 'Ter',
-        3 => 'Qua',
-        4 => 'Qui',
-        5 => 'Sex',
-        6 => 'Sáb',
-    )[(int)$number] ?? '--';
-}
-
 function mapa_salas_content_handler() {
 
     global $wpdb;
-
-    $reservas = $wpdb->get_results("SELECT * FROM `intranet_wp`.`wp_fafar_cf7crud_submissions` WHERE `object_name` = 'reservation'" , 'ARRAY_A' );
-
-    //echo count($reservas);
-
-    //print_r($reservas[0]);
-
-    $line_objs = [];
-
-    foreach ( $reservas as $reserva ) {
-
-        $reserva['data'] = json_decode( $reserva['data'], true );
-
-        if( ! $reserva['data']['class_subject'] || ! $reserva['data']['place'] ) continue;
-
-
-        // Obtendo disciplina
-        $disciplina = $wpdb->get_results("SELECT * FROM `intranet_wp`.`wp_fafar_cf7crud_submissions` WHERE `id` = '" . $reserva['data']['class_subject'][0] . "'", 'ARRAY_A' );
-
-        if( ! $disciplina ) continue;
-
-        $disciplina['data'] = json_decode( $disciplina[0]['data'], true );
-
-
-        // Obtendo sala de aula
-        $sala = $wpdb->get_results("SELECT * FROM `intranet_wp`.`wp_fafar_cf7crud_submissions` WHERE `id` = '" . $reserva['data']['place'][0] . "'", 'ARRAY_A' );
-
-        if( ! $sala ) continue;
-
-        $sala['data'] = json_decode( $sala[0]['data'], true );
-
-
-        
-        $dias_da_semana = implode( ', ', array_map( function( $weekday ) { return parse_weekday_to_name( $weekday ); }, (array) $reserva['data']['weekdays'] ) );
-
-        $line_objs[] = array(
-            'cod_disciplina'   => $disciplina['data']['code'],
-            'nome_disciplina'  => $disciplina['data']['name_of_subject'],
-            'turma_disciplina' => $disciplina['data']['group'],
-            'desc_sala'        => $sala['data']['number'] . ' <br />Bloco: ' . $sala['data']['block'] . ' <br />Andar: ' . $sala['data']['floor'] . 'º',
-            'dias_semana'      => $dias_da_semana,
-            'hora_inicio'      => $reserva['data']['start_time'],
-            'hora_fim'         => $reserva['data']['end_time'],
-        );
-
-    }
-
-    // Ordenar pelo código da disciplina
-    usort( $line_objs, function( $a, $b ) {
-        return $a['cod_disciplina'] <=> $b['cod_disciplina']; // Sort ascending
-    } );
-
+    
     $lines = "";
 
-    foreach( $line_objs as $line_obj ) {
+    $reservas = $wpdb->get_results("SELECT * FROM `intranet_wp`.`wp_fafar_cf7crud_submissions` WHERE `object_name` = 'reservation'");
+
+    $reservas_unique = separe_unique( $reservas );
+
+    $disciplinas = $wpdb->get_results("SELECT `id`, `cod_disciplina`, `nome`, `turma` FROM `intranet`.`disciplinas`");
+
+    $salas = $wpdb->get_results("SELECT `id`, `numero`, `bloco`, `andar` FROM `intranet`.`salas`");
+
+    $dias_da_semana = array( "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" );
+
+    foreach ( $reservas_unique as $key => $value ) {
+
+        
+        $disciplina = obterObjetoPorID( ( explode(".", $key)[1]), $disciplinas );
+        $sala       = obterObjetoPorID( ( explode(".", $key)[0]), $salas );
+        $diasemana  = $dias_da_semana[((int) explode(".", $key)[2])];
 
         $lines .= '<tr class="small">' .
-                    '<th scope="row">' . $line_obj['cod_disciplina']. '</th>' .
-                    '<td>' . $line_obj['nome_disciplina'] . '</td>' .
-                    '<td>' . $line_obj['turma_disciplina'] . '</td>' .
-                    '<td>' . $line_obj['desc_sala'] . '</td>' .
-                    '<td>' . $line_obj['dias_semana'] . '</td>' .
-                    '<td>' . $line_obj['hora_inicio'] . '</td>' .
-                    '<td>' . $line_obj['hora_fim'] . '</td>' .
-                '</tr>';
-
+                    '<th scope="row">' . ( $disciplina->cod_disciplina ?? "--" ) . '</th>' .
+                    '<td>' . ( $disciplina->nome ?? "-" ) . '</td>' .
+                    '<td>' . ( $disciplina->turma ?? "-" ) . '</td>' .
+                    '<td>' . ( $sala->numero ?? "--" ) . ' • Bl ' . ( $sala->bloco ?? "--" ) . '</td>' .
+                    '<td>' . $diasemana . '</td>' .
+                    '<td>' . intranet_fafar_api_get_hours_by_timestamp( ((int) explode(".", $value)[1]) / 1000 ) . '</td>' .
+                    '<td>' . intranet_fafar_api_get_hours_by_timestamp( ((int) explode(".", $value)[2]) / 1000 ) . '</td>' .
+                  '</tr>';
     }
+
+
 
 
     $html = '<div class="mt-5 d-flex flex-column gap-3">
