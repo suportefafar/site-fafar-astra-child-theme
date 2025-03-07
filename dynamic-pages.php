@@ -73,7 +73,7 @@ function mapa_salas_content_handler() {
 
     global $wpdb;
 
-    $reservas = $wpdb->get_results("SELECT * FROM `intranet_wp`.`wp_fafar_cf7crud_submissions` WHERE `object_name` = 'reservation'" , 'ARRAY_A' );
+    $reservas = $wpdb->get_results("SELECT * FROM `intranet_wp`.`wp_fafar_cf7crud_submissions` WHERE `object_name` = 'reservation' AND `is_active` = '1'" , 'ARRAY_A' );
 
     //echo count($reservas);
 
