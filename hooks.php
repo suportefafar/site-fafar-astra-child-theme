@@ -8,9 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Usando 'fafar_cf7crud_before_create' para enviar as 
  * reservas de auditório para a intranet.
 */
-add_action( 'fafar_cf7crud_before_create', 'site_fafar_before_send_mail_handler', 10, 2 );
+add_action( 'fafar_cf7crud_before_create', 'site_fafar_before_send_mail_handler', 10, 1 );
 
-function site_fafar_before_send_mail_handler( $form_data, $contact_form ) {
+function site_fafar_before_send_mail_handler( $form_data ) {
 
     if( ! isset( $form_data['object_name'] ) ) return $form_data;
 

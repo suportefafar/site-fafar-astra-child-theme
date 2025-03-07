@@ -107,10 +107,16 @@ function mapa_salas_content_handler() {
         
         $dias_da_semana = implode( ', ', array_map( function( $weekday ) { return parse_weekday_to_name( $weekday ); }, (array) $reserva['data']['weekdays'] ) );
 
+        $desc = $disciplina['data']['code'] . ' ' . $disciplina['data']['name_of_subject'] . ' (' . $disciplina['data']['group'] . ')';
+        
+        if( isset( $reserva['data']['desc'] ) && $reserva['data']['desc'] ) {
+            $code   = explode( ' ', $reserva['data']['desc'] )[0];
+            $groups = explode( ' ', $reserva['data']['desc'] )[1];
+            $desc   = $code . ' ' . $disciplina['data']['name_of_subject'] . $groups;
+        }
+
         $line_objs[] = array(
-            'cod_disciplina'   => $disciplina['data']['code'],
-            'nome_disciplina'  => $disciplina['data']['name_of_subject'],
-            'turma_disciplina' => $disciplina['data']['group'],
+            'desc_reserva'     => $desc,
             'desc_sala'        => $sala['data']['number'] . ' <br />Bloco: ' . $sala['data']['block'] . ' <br />Andar: ' . $sala['data']['floor'] . 'º',
             'dias_semana'      => $dias_da_semana,
             'hora_inicio'      => $reserva['data']['start_time'],
@@ -121,7 +127,7 @@ function mapa_salas_content_handler() {
 
     // Ordenar pelo código da disciplina
     usort( $line_objs, function( $a, $b ) {
-        return $a['cod_disciplina'] <=> $b['cod_disciplina']; // Sort ascending
+        return $a['desc_reserva'] <=> $b['desc_reserva']; // Sort ascending
     } );
 
     $lines = "";
@@ -129,9 +135,7 @@ function mapa_salas_content_handler() {
     foreach( $line_objs as $line_obj ) {
 
         $lines .= '<tr class="small">' .
-                    '<th scope="row">' . $line_obj['cod_disciplina']. '</th>' .
-                    '<td>' . $line_obj['nome_disciplina'] . '</td>' .
-                    '<td>' . $line_obj['turma_disciplina'] . '</td>' .
+                    '<th scope="row">' . $line_obj['desc_reserva']. '</th>' .
                     '<td>' . $line_obj['desc_sala'] . '</td>' .
                     '<td>' . $line_obj['dias_semana'] . '</td>' .
                     '<td>' . $line_obj['hora_inicio'] . '</td>' .
@@ -153,9 +157,7 @@ function mapa_salas_content_handler() {
                     <table class="table table-striped">
                         <thead>
                             <tr class="small">
-                                <th scope="col">Código</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Turma</th>
+                                <th scope="col">Disciplina</th>
                                 <th scope="col">Sala</th>
                                 <th scope="col">Dia da Semana</th>
                                 <th scope="col">Hr. Início</th>
