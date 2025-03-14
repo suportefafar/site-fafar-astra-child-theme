@@ -39,27 +39,16 @@ add_action( 'wp_enqueue_scripts', 'child_enqueue_styles', 15 );
  *		ADDED BY Setor de Suporte e T.I. 
 */
 
-
-require_once 'shortcodes.php';
-
-require_once 'import-scripts.php';
-
-
-/**
- * Register Custom Navigation Walker
- */
-require_once 'class-wp-fafar-menu-walker.php';
-
-
-/*
- *	Register FAFAR Custom Banner 
- * */
-require_once 'banner.php';
-
+// 
+require_once get_stylesheet_directory() . '/shortcodes.php';
+// 
+require_once get_stylesheet_directory() . '/import-scripts.php';
+// Register Custom Navigation Walker
+require_once get_stylesheet_directory() . '/class-wp-fafar-menu-walker.php';
+// Register FAFAR Custom Banner
+require_once get_stylesheet_directory() . '/banner.php';
 // Carregar funções customizadas
-
 require_once get_stylesheet_directory() . '/hooks.php';
-
 
 /*
  * Changing "Read More" button text  
