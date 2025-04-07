@@ -72,3 +72,14 @@ function register_dynamic_pages_handler(){
 	require_once get_theme_file_path() . '/dynamic-pages.php';
 }
 add_action( 'after_setup_theme', 'register_dynamic_pages_handler' );
+
+
+/*
+ * Desabilita os links que o Astra Theme coloca para 
+ * o post anterior e próximo, no final da página de um post. 
+ */
+add_action( 'wp', function() {
+    if (is_single()) {
+        remove_action( 'astra_entry_after', 'astra_single_post_navigation_markup' );
+    }
+} );
